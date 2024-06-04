@@ -1,0 +1,46 @@
+{{ block "index" . }}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Weather Station</title>
+        <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+        <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+        <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/sse.js"></script>
+        <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+        <link rel="manifest" href="/static/site.webmanifest">
+    </head>
+    <body class="bg-dark">
+        <div class="hero hero-sm bg-primary"> 
+            <div class="hero-body"> 
+                <h1>Weather Station</h1> 
+            </div>
+        </div>
+        <div class="container">
+            <div class="columns">
+                <div class="column col-2 hide-sm"> </div>
+                <div class="column col-5">
+                    <h3>Location</h3>
+                    <h3>Local Temperature</h3>
+                    <h3>Local Humidity</h3>
+                    <h3>Outdoor Temperature</h3>
+                </div>
+                <div class="column col-1 show-sm"> </div>
+                <div class="column col-3">
+                    <div hx-ext="sse" sse-connect="/sse">
+                        <h3>Santa Cruz</h3>
+                        <div sse-swap="localtemp" hx-swap="innerHTML"><h3>?</h3></div>
+                        <div sse-swap="localhumi" hx-swap="innerHTML"><h3>?</h3></div>
+                        <div sse-swap="outtemp" hx-swap="innerHTML"><h3>?</h3></div>
+                    </div>
+                </div>
+                <div class="column col-2 hide-sm"> </div>
+            </div>
+        </div>
+    </body>
+</html>
+{{ end }}
+
